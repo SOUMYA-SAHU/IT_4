@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Navbar styles */
+        /* Navbar styles */
+        .navbar {
+            background-color: #FFFFFFF; /* Background color with transparency */
+            color: black;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            table-layout: fixed;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            font-family: Noto Serif;
+            font-style: Noto Serif;
+        }
+
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .navbar ul li {
+            float: left;
+        }
+
+        .navbar ul li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #FFFFFFF; /* Background color with transparency */
+            color: brown;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 2px solid grey;
+            transition: 0.5s;
+        }
+
+        body {
+            background-image: url('static/img/main_bck1.png'); /* Replace 'path/to/your/image.jpg' with the actual path to your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        /* Table container styles */
+        .table-container {
+            background-color: rgba(255, 138, 102, 0.5); /* Semi-transparent orange background */
+            padding: 10px;
+            margin-top: 50px;
+            margin-left: 170px;
+            border-radius: 10px;
+            max-width:900px;
+            font-family: "Helvetica Neue",
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(255, 170, 128, 0.5); /* Semi-transparent light orange background */
+        }
+
+        /* Form styles */
+        form {
+            display: inline-block;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #f75a2a; /* Orange color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff7e3d; /* Darker orange color on hover */
+        }
+
+        /* Table row hover effect */
+        tbody tr:hover {
+            border: 2px solid #f75a2a; /* Orange border on hover */
+            border-radius: 5px;
+        }
+
+        .logout-button {
+            background-color: #f75a2a; /* Orange color */
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #ff7e3d; /* Darker orange color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="teacherlanding_page">Home</a></li>
+        </ul>
+        <button class="logout-button" onclick="location.href='logout_viewsteacher'">Logout</button>
+    </div>
+    <hr>
+    <div class="table-container">
+    <h1 style="margin-top:10px">Student Details</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="course_code">Course Code:</label>
+        <select name="course_code" id="course_code">
+            <option value="">Select Course Code</option>
+            {% for code in course_codes %}
+                <option value="{{ code }}">{{ code }}</option>
+            {% endfor %}
+        </select>
+        <label for="section">Section:</label>
+        <select name="section" id="section">
+            <option value="">Select Section</option>
+            {% for section in sections %}
+                <option value="{{ section }}">{{ section }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+    {% if student_courses %}
+        <br>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Course Name</th>
+                    <th>Attendance (%)</th>
+                    <th>Marks</th>
+                    <th>Update Attendance</th>
+                    <th>Update Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in student_courses %}
+                <tr>
+                    <td>{{ course.regno.name }}</td>
+                    <td>{{ course.course_code.course_name }}</td>
+                    <td>{{ course.attendance }}</td>
+                    <td>{{ course.course_marks }}</td>
+                    <td>
+                        <form method="post" action="{% url 'update_attendance' %}">
+                            {% csrf_token %}
+                            <input type="hidden" style="width: 45px;"name="course_id" value="{{ course.id }}">
+                            <input type="number" style="width: 45px;" name="attendance" value="{{ course.attendance }}">
+                            <button type="submit" >Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'update_marks' %}">
+                            {% csrf_token %}
+                            <input type="hidden" style="width: 45px;"name="course_id" value="{{ course.id }}">
+                            <input type="number" style="width: 45px;"name="marks" value="{{ course.course_marks }}">
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<style>
+  body {
+    font-family: Merriweather Bold;
+    margin: 0;
+    padding: 0;
+    background-color: #eef3ff;
+    background-image: url('static/img/wall2.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .navbar {
+    background-color: rgba(255, 138, 102, 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+  }
+
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    flex-direction: column;
+  }
+  
+  .form-box {
+    border: 2px solid grey;
+    background-color: rgba(255, 138, 102, 0);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 450px;
+    height:250px;
+    text-align: center;
+  }
+  
+  .form-box input, .form-box select {
+    background-color: rgba(170, 183, 184, 0);
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1.4px solid grey;
+    box-sizing: border-box;
+  }
+  
+  .form-box button {
+    margin-top:20px;
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+  }
+
+</style>
+</head>
+<body>
+  <div class="navbar">
+    <div></div>
+    <div>
+      <a href="about_us">About Us</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </div>
+<hr>
+  <div class="form-container" style="margin-top = 200px">
+    <div class="form-box">
+      <h2>Login</h2>
+      {% if messages %}
+        <div class="messages">
+          <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      <form method="post" action="{% url 'signin_teacher' %}">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" pattern="[0-9]{5}" title="Please enter exactly 5 numbers" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

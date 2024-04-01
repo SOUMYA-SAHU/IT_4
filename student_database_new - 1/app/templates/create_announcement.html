@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Announcement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .navbar {
+            background-color: #FFFFFFF; /* Background color with transparency */
+            color: black;
+            padding: 2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            table-layout: fixed;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            font-family: Noto Serif;
+            font-style: Noto Serif;
+        }
+
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .navbar ul li {
+            float: left;
+        }
+
+        .navbar ul li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #FFFFFFF; /* Background color with transparency */
+            color: brown;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 0.5px solid grey;
+            {% comment %} transition: 0.5s; {% endcomment %}
+        }
+
+        .logout-button {
+            background-color: #f75a2a; /* Orange color */
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #ff7e3d; /* Darker orange color on hover */
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 700px;
+            max-height: 500px;
+            margin: 0 170px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Box shadow for container */
+        }
+
+        /* Form styles */
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #f75a2a; /* Orange color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff7e3d; /* Darker orange color on hover */
+        }
+        body {
+            background-image: url('static/img/main_bck1.png'); /* Background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        input{
+            background-color: rgba(255, 138, 102, 0);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="teacherlanding_page">Home</a></li>
+        </ul>
+        <button class="logout-button" onclick="location.href='logout_viewsteacher'">Logout</button>
+    </div>
+    <hr>
+    <div class="container">
+        <h2>Create Announcement</h2>
+        <form id="announcementForm" method="post">
+            {% csrf_token %}
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" cols="50" style ="background-color: rgba(255, 138, 102, 0);"></textarea><br>
+            <label for="section">Section (optional):</label>
+            <input type="text" id="section" name="section"><br>
+            <label for="course_code">Course Code (optional):</label>
+            <input type="text" id="course_code" name="course_code"><br>
+            <input type="checkbox" id="global_announcement" name="global_announcement" value="global">
+            <label for="global_announcement">Global Announcement</label><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('announcementForm').addEventListener('submit', function(event) {
+            // Display prompt when submission is successful
+            alert('Announcement submitted successfully!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup Page</title>
+<style>
+  body {
+    font-family:Merriweather;
+    margin: 0;
+    padding: 0;
+    background-color: #eef3ff;
+    background-image: url('static/img/wall2.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-weight: bold;
+  }
+  
+  .navbar {
+    background-color: rgba(255, 138, 102, 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+  }
+
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+  
+  .form-box {
+    border: 2px solid grey;
+    background-color: rgba(255, 138, 102, 0);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 450px;
+    text-align: center;
+  }
+  
+  .form-box input, .form-box select {
+    background-color: rgba(255, 138, 102, 0);
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1.4px solid grey;
+    box-sizing: border-box;
+  }
+  
+  .form-box button {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+  }
+
+  .register-text {
+    margin-top: 5px;
+    font-size: 15px;
+    color: #5D6D7E;
+    
+  }
+  
+  .register-text a {
+    color: orange;
+    text-decoration: unordered_list_item;
+  }
+</style>
+</head>
+<body>
+ 
+  <div class="form-container">
+    <div class="form-box">
+      <h2>Signup</h2>
+      <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="number" name="regno" placeholder="Regno" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <select name="gender" id="gender" required>
+          <option value="" disabled selected>Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="tel" name="contact_number" placeholder="Contact Number" required>
+        <input type="text" name="branch" placeholder="Branch" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <button type="submit">Signup</button>
+      </form>
+      <div class="register-text">
+        <p>Already registered? <a href="signin_student">Login</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Navbar styles */
+        .navbar {
+            background-color: #FFFFFFF; /* Background color with transparency */
+            color: black;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            table-layout: fixed;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            font-family: Noto Serif;
+            font-style: Noto Serif;
+        }
+
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .navbar ul li {
+            float: left;
+        }
+
+        .navbar ul li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #FFFFFFF; /* Background color with transparency */
+            color: brown;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 2px solid grey;
+            transition: 0.5s;
+        }
+
+        /* Container styles */
+        .container {
+
+            margin-left: 130px;
+            max-width: 50%; /* Match max-width with the landing page */
+            padding: 20px;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%; /* Adjusted width to fit within the navbar */
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-left: 0; /* Removed margin to align with navbar */
+            font-size: 18px; /* Match font size with the landing page */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f75a2a; /* Match background color with the landing page */
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ff8a66; /* Lighter shade of #f75a2a */
+        }
+
+        tr:hover {
+            box-shadow: 0 0 10px white; /* Glow effect on hover */
+        }
+
+        td {
+            border-bottom: 1px solid #f75a2a; /* Border between rows */
+        }
+
+        .logout-button {
+            background-color: #f75a2a; /* Updated color */
+            border: none;
+            margin-right: 10px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: rgba(247, 90, 42, 0.7); /* Darker color on hover */
+        }
+
+        /* Background image */
+        body {
+            background-image: url('static/img/main_bck1.png'); /* Replace with the actual background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0.7; /* 30% fade effect */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <ul>
+            <li><a href="studentlanding_page">Home</a></li>
+        </ul>
+        <button class="logout-button" onclick="location.href='logout_viewsstudent'">Logout</button>
+    </div>
+    <hr>
+
+    <!-- Main content -->
+    <div class="container">
+        <h2>Student Attendance</h2>
+        <p><strong>Name:</strong> {{ student_details.name }}</p>
+        <p><strong>Registration Number:</strong> {{ student_details.regno }}</p>
+        <hr> <!-- Horizontal line added -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Section</th>
+                    <th>Attendance (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in student_courses %}
+                <tr>
+                    <td>{{ course.course_code.course_name }}</td>
+                    <td>{{ course.course_code.dept }}</td>
+                    <td>{{ course.attendance }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

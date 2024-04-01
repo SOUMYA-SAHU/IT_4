@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('static/img/main_bck1.png'); /* Background image from student_landingpage */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        /* Navbar styles */
+        .navbar {
+            background-color: #FFFFFFF; /* Background color with transparency */
+            color: black;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            table-layout: fixed;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            font-family: Noto Serif;
+            font-style: Noto Serif;
+        }
+
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .navbar ul li {
+            float: left;
+        }
+
+        .navbar ul li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #FFFFFFF; /* Background color with transparency */
+            color: brown;
+            text-decoration: none;
+            border-radius: 10px;
+            border: 2px solid grey;
+            transition: 0.5s;
+        }
+        .container {
+            width: 60%;
+            margin-top: 20px;
+            margin-left: 180px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent background color */
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        h1 {
+            text-align: left;
+            margin-bottom: 20px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #f75a2a; /* Updated color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: rgba(247, 90, 42, 0.7); /* Darker color on hover */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .opted-course {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background color */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Logout button styles */
+        .logout-button {
+            background-color: #f75a2a; /* Updated color */
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: rgba(247, 90, 42, 0.7); /* Darker color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <ul>
+                <li><a href="studentlanding_page">Home</a></li>
+            </ul>
+        </div>
+        <button class="logout-button" onclick="location.href='logout_viewsstudent'">Logout</button>
+    </div>
+    <hr>
+    <div class="container">
+        <h1>Available Courses</h1>
+        <form method="post" action="{% url 'opt_course' %}">
+            {% csrf_token %}
+            {% for course in available_courses %}
+                <input type="checkbox" name="course_id" value="{{ course.id }}"> {{ course.course_name }} - {{ course.course_code }}<br>
+            {% endfor %}
+            <button type="submit">Opt Courses</button>
+        </form>
+
+        <hr>
+
+        <h1>Opted Courses</h1>
+        <div class="opted-courses">
+            <ul>
+                {% for course in opted_courses %}
+                    <li>{{ course.course_code.course_name }} - {{ course.course_code.course_code}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

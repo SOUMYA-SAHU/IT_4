@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page with Cards and Navbar</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eef3ff;
+    background-image: url('static/img/wall2.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .navbar {
+    background-color: #FFFFFFF; /* Background color with transparency */
+    color: black;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    font-size: 20px;
+    font-family: 'Rubik Scribble', sans-serif; /* Change font family */
+  }
+
+  .navbar a {
+    margin-left: 20px; /* Add more spacing between links */
+    text-decoration: none;
+    color: black;
+  }
+
+  .container {
+    background-color: rgba(255, 138, 102, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .card {
+    background-color: rgba(255, 138, 102, 0);
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 20px;
+    margin-top: 80px;
+    padding: 20px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    border: 2.6px solid black; /* Greyish border color */
+  }
+
+  .card:hover {
+    transform: scale(1.1);
+  }
+
+  .card img {
+    width: 200px;
+    margin-bottom: 105x;
+  }
+
+  .card .role {
+    font-family: 'Chango', cursive; /* Change font family */
+    font-size: 30px;
+  }
+
+  .card, a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
+  </div>
+  <hr>
+  <div class="container">
+    <a href="signin_student">
+      <div class="card">
+        <img src="static/img/student.png" alt="Student Image">
+        <div class="role">Student</div>
+      </div>
+    </a>
+    <a href="signin_teacher">
+      <div class="card">
+        <img src="static/img/female.png" alt="Admin Image">
+        <div class="role">Teacher</div>
+      </div>
+    </a>
+  </div>
+</body>
+</html>
